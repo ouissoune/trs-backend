@@ -1,0 +1,17 @@
+[Unit]
+Description=TRS Backend Service
+After=network.target
+
+[Service]
+EnvironmentFile=/opt/trs-backend/.env
+Environment=SPRING_PROFILES_ACTIVE=prod
+Type=simple
+User=trs
+WorkingDirectory=/opt/trs-backend
+ExecStart=/usr/bin/java -jar /opt/trs-backend/app.jar
+SuccessExitStatus=143
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
