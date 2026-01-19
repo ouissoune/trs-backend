@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy JAR app to Azure Web App - trs-app-service-prod
+name: Build and deploy WAR app to Azure Web App - trs-app-service-prod
 
 on:
   push:
@@ -25,18 +25,18 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
-        run: mvn clean install -DskipTests
+        run: mvn clean install
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/target/*.war'
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build
-      
+    needs: build 
+    
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
@@ -49,6 +49,5 @@ jobs:
         with:
           app-name: 'trs-app-service-prod'
           slot-name: 'Production'
-          package: '*.jar'
-
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6816792BDAF647709CFA47A8A50E6BDE }}
+          package: '*.war'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E1CCC2D5E0CB447FA429224A211E0A1F }}
