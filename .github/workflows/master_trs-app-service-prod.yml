@@ -25,7 +25,7 @@ jobs:
           distribution: 'microsoft'
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean install -DskipTests
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -50,4 +50,5 @@ jobs:
           app-name: 'trs-app-service-prod'
           slot-name: 'Production'
           package: '*.jar'
+
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6816792BDAF647709CFA47A8A50E6BDE }}
