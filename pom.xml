@@ -13,6 +13,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>trs</name>
 	<description>trs</description>
+	<packaging>war</packaging>
 	<url/>
 	<licenses>
 		<license/>
